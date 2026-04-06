@@ -23,6 +23,13 @@ function getDb(): DatabaseType {
         updated_at TEXT DEFAULT (datetime('now'))
       );
     `);
+    _db.exec(`
+      CREATE TABLE IF NOT EXISTS subscribers (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        email TEXT UNIQUE NOT NULL,
+        created_at TEXT DEFAULT (datetime('now'))
+      );
+    `);
   }
   return _db;
 }
@@ -42,6 +49,8 @@ export const queries = {
     getDb().prepare("UPDATE users SET usage_count = 0, usage_reset_date = date('now', 'start of month', '+1 month'), updated_at = datetime('now') WHERE id = ?").run(userId),
   getUserByStripeCustomer: (customerId: string) =>
     getDb().prepare("SELECT * FROM users WHERE stripe_customer_id = ?").get(customerId),
+  addSubscriber: (email: string) =>
+    getDb().prepare("INSERT OR IGNORE INTO subscribers (email) VALUES (?)").run(email),
 };
 
 export interface User {
