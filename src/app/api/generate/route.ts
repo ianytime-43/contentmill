@@ -12,9 +12,10 @@ const VALID_PLATFORMS: Platform[] = [
 export async function POST(req: NextRequest) {
   try {
     const body = await req.json();
-    const { content, platforms } = body as {
+    const { content, platforms, apiKey } = body as {
       content: string;
       platforms: Platform[];
+      apiKey?: string;
     };
 
     if (!content || typeof content !== "string" || content.trim().length === 0) {
@@ -42,12 +43,26 @@ export async function POST(req: NextRequest) {
       );
     }
 
+    // Determine which API key to use: server env takes priority, then user-provided
+    const effectiveKey = process.env.ANTHROPIC_API_KEY || apiKey;
+    if (!effectiveKey) {
+      return NextResponse.json(
+        {
+          error:
+            "API key not configured. Please add your Anthropic API key to use this feature.",
+          needsKey: true,
+        },
+        { status: 401 }
+      );
+    }
+
     // Limit content length (roughly 10,000 words)
     const trimmedContent = content.slice(0, 50000);
 
     const results: GeneratedContent[] = await generateContent(
       trimmedContent,
-      validPlatforms
+      validPlatforms,
+      effectiveKey
     );
 
     return NextResponse.json({ results });

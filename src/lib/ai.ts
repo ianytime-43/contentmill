@@ -1,8 +1,6 @@
 import Anthropic from "@anthropic-ai/sdk";
 import { Platform, platformConfigs } from "./prompts";
 
-const client = new Anthropic(); // Uses ANTHROPIC_API_KEY env var
-
 export interface GeneratedContent {
   platform: Platform;
   content: string;
@@ -11,8 +9,13 @@ export interface GeneratedContent {
 
 export async function generateContent(
   sourceContent: string,
-  platforms: Platform[]
+  platforms: Platform[],
+  apiKey?: string
 ): Promise<GeneratedContent[]> {
+  const client = new Anthropic({
+    apiKey: apiKey || process.env.ANTHROPIC_API_KEY,
+  });
+
   // Run all platform generations in parallel using Promise.all
   const results = await Promise.all(
     platforms.map(async (platform) => {
