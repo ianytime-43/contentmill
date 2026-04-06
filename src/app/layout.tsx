@@ -13,8 +13,24 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "ContentMill — AI Content Repurposer",
-  description: "Turn one piece of content into 20+ platform-optimized posts. Powered by AI.",
+  title: "ContentMill — AI Content Repurposer | Turn 1 Post Into 20+",
+  description: "Turn a single blog post into 20+ ready-to-publish posts for Twitter, LinkedIn, newsletters, and Instagram. Powered by AI. Try free.",
+  keywords: ["content repurposer", "AI content tool", "social media automation", "content marketing", "repurpose blog posts", "AI writing tool"],
+  openGraph: {
+    title: "ContentMill — Turn 1 Post Into 20+",
+    description: "AI-powered content repurposing. Paste once, get posts for every platform. Try it free.",
+    type: "website",
+    siteName: "ContentMill",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "ContentMill — Turn 1 Post Into 20+",
+    description: "AI-powered content repurposing. Paste once, get posts for every platform.",
+  },
+  robots: {
+    index: true,
+    follow: true,
+  },
 };
 
 export default function RootLayout({
