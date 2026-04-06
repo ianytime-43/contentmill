@@ -44,7 +44,7 @@ Each piece matches the tone and format that works on that specific platform. Not
 
 **Tweet 4 (How it works)**
 
-Under the hood, it uses GPT-4o and Claude to understand your voice and adapt it.
+Under the hood, it uses Claude AI to understand your voice and adapt it.
 
 A Twitter thread sounds like a Twitter thread. A LinkedIn post sounds like a LinkedIn post. A newsletter intro sounds like a newsletter intro.
 
@@ -123,7 +123,7 @@ I've been building ContentMill for the past few months and just launched it publ
 
 **What ContentMill does:** You paste in any long-form content (blog post, newsletter, script, etc.) and it generates 20+ ready-to-post pieces across platforms. Each one is adapted to that platform's format and tone -- not just generic rewrites.
 
-**Tech stack:** Next.js, deployed on Vercel. Uses GPT-4o and Claude under the hood for generation.
+**Tech stack:** Next.js, deployed on Vercel. Uses Claude AI under the hood for generation.
 
 **Pricing:** Free tier (3 repurposes/month), Pro at $29/mo, Unlimited at $79/mo.
 
@@ -177,7 +177,7 @@ Just launched ContentMill and wanted to share it here since this community has b
 
 **What makes it different from ChatGPT:** Two things. First, it's purpose-built for this workflow -- paste, pick platforms, get output. No prompt engineering required. Second, it actually adapts tone per platform instead of doing generic rewrites.
 
-**Stack:** Next.js on Vercel, GPT-4o + Claude for generation.
+**Stack:** Next.js on Vercel, Claude AI for generation.
 
 **Revenue model:** Freemium. Free tier with 3 repurposes/month, Pro at $29/mo, Unlimited at $79/mo.
 
@@ -195,7 +195,7 @@ The short version: paste a blog post, get 20+ ready-to-publish posts for Twitter
 
 The longer version: if you create content, you already know the bottleneck isn't writing -- it's distribution. You spend an hour writing something great, then another two hours reformatting it for every channel. Same ideas, different packaging, over and over.
 
-ContentMill uses AI (GPT-4o and Claude) to handle that reformatting step. But the important part is that it doesn't just rewrite your content generically. It adapts your voice and tone for each platform. Your Twitter thread reads like a Twitter thread. Your LinkedIn post reads like a LinkedIn post.
+ContentMill uses AI (Claude AI) to handle that reformatting step. But the important part is that it doesn't just rewrite your content generically. It adapts your voice and tone for each platform. Your Twitter thread reads like a Twitter thread. Your LinkedIn post reads like a LinkedIn post.
 
 Three steps: paste your content, pick your platforms, copy your output.
 
@@ -219,7 +219,7 @@ I built ContentMill (https://contentmill-ai.vercel.app) to solve a specific prob
 
 You paste in any long-form content (blog post, newsletter, script) and it generates 20+ posts optimized for Twitter, LinkedIn, newsletters, and Instagram. Each output is adapted to the platform's conventions -- not just the same text with minor edits.
 
-It uses GPT-4o and Claude for generation, with platform-specific prompting to produce output that matches each channel's expected format and tone.
+It uses Claude AI for generation, with platform-specific prompting to produce output that matches each channel's expected format and tone.
 
 Tech: Next.js, deployed on Vercel. Free tier available (3 repurposes/month).
 
