@@ -5,7 +5,10 @@ let _db: DatabaseType | null = null;
 
 function getDb(): DatabaseType {
   if (!_db) {
-    const DB_PATH = path.join(process.cwd(), "contentmill.db");
+    const isVercel = process.env.VERCEL === "1";
+    const DB_PATH = isVercel
+      ? path.join("/tmp", "contentmill.db")
+      : path.join(process.cwd(), "contentmill.db");
     _db = new Database(DB_PATH);
     _db.pragma("journal_mode = WAL");
     _db.exec(`
