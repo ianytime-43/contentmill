@@ -4,7 +4,7 @@ export default function Footer() {
       <div className="mx-auto max-w-6xl px-6 py-12">
         <div className="flex flex-col md:flex-row items-center justify-between gap-6">
           {/* Logo */}
-          <a href="#" className="text-lg font-bold tracking-tight">
+          <a href="/" className="text-lg font-bold tracking-tight">
             <span className="gradient-text">ContentMill</span>
           </a>
 

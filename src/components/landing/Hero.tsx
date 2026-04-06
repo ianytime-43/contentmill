@@ -91,7 +91,7 @@ export default function Hero() {
       {/* Nav */}
       <nav className="relative z-10 mx-auto flex max-w-6xl items-center justify-between px-6 py-5">
         <div className="flex items-center gap-8">
-          <a href="#" className="text-lg font-bold tracking-tight">
+          <a href="/" className="text-lg font-bold tracking-tight">
             <span className="gradient-text">ContentMill</span>
           </a>
           <div className="hidden md:flex items-center gap-6">
@@ -100,11 +100,11 @@ export default function Hero() {
           </div>
         </div>
         <div className="flex items-center gap-3">
-          <a href="#" className="hidden sm:inline-block text-sm text-muted hover:text-foreground transition-colors">
+          <a href="/signin" className="hidden sm:inline-block text-sm text-muted hover:text-foreground transition-colors">
             Sign In
           </a>
           <a
-            href="#"
+            href="/signin"
             className="rounded-lg bg-primary px-4 py-2 text-sm font-medium text-white hover:bg-primary-dark transition-colors"
           >
             Get Started
@@ -117,7 +117,7 @@ export default function Hero() {
         {/* Badge */}
         <div className="animate-fade-in-up mb-6 inline-flex items-center gap-2 rounded-full border border-border bg-surface px-4 py-1.5 text-xs text-muted">
           <span className="h-1.5 w-1.5 rounded-full bg-green-400" />
-          Now with GPT-4o and Claude support
+          Powered by Claude AI
         </div>
 
         {/* Headline */}
@@ -135,14 +135,14 @@ export default function Hero() {
         {/* CTAs */}
         <div className="animate-fade-in-up animate-delay-200 flex flex-col sm:flex-row items-center justify-center gap-4 mb-16">
           <a
-            href="#"
+            href="/signin"
             className="group inline-flex items-center gap-2 rounded-lg bg-gradient-to-r from-primary to-violet-500 px-6 py-3 text-sm font-semibold text-white shadow-lg shadow-primary/25 hover:shadow-primary/40 transition-all"
           >
             Start Free
             <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
           </a>
           <a
-            href="#"
+            href="#demo"
             className="group inline-flex items-center gap-2 rounded-lg border border-border px-6 py-3 text-sm font-semibold text-foreground hover:bg-surface transition-colors"
           >
             <Play className="h-4 w-4 text-primary-light" />

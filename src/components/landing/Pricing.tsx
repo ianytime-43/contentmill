@@ -103,7 +103,7 @@ export default function Pricing() {
               </ul>
 
               <a
-                href="#"
+                href="/signin"
                 className={`block w-full rounded-lg py-3 text-center text-sm font-semibold transition-colors ${
                   tier.highlighted
                     ? "bg-gradient-to-r from-primary to-violet-500 text-white shadow-lg shadow-primary/25 hover:shadow-primary/40"
