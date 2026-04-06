@@ -11,8 +11,8 @@ import {
   Loader2,
   Sparkles,
   Lock,
-  Key,
 } from "lucide-react";
+import { DEMO_INPUT, DEMO_OUTPUTS } from "@/lib/demo-content";
 
 type Platform = "twitter" | "linkedin" | "newsletter" | "instagram";
 
@@ -34,7 +34,6 @@ const platformOptions: {
 ];
 
 const DEMO_KEY = "contentmill_demo_used";
-const BYOK_KEY = "contentmill_api_key";
 
 function CopyButton({ text }: { text: string }) {
   const [copied, setCopied] = useState(false);
@@ -83,7 +82,7 @@ function platformColor(platform: Platform): string {
 }
 
 export default function Demo() {
-  const [content, setContent] = useState("");
+  const [content, setContent] = useState(DEMO_INPUT);
   const [selectedPlatforms, setSelectedPlatforms] = useState<Set<Platform>>(
     new Set(["twitter"])
   );
@@ -91,8 +90,6 @@ export default function Demo() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
   const [demoUsed, setDemoUsed] = useState(false);
-  const [needsKey, setNeedsKey] = useState(false);
-  const [apiKeyInput, setApiKeyInput] = useState("");
 
   const togglePlatform = (platform: Platform) => {
     setSelectedPlatforms((prev) => {
@@ -126,45 +123,21 @@ export default function Demo() {
     setError("");
     setLoading(true);
     setResults([]);
-    setNeedsKey(false);
 
-    try {
-      const storedKey =
-        typeof window !== "undefined"
-          ? sessionStorage.getItem(BYOK_KEY)
-          : null;
+    // Simulate a realistic generation delay
+    await new Promise((resolve) => setTimeout(resolve, 2000));
 
-      const res = await fetch("/api/generate", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          content: content.trim(),
-          platforms: Array.from(selectedPlatforms),
-          ...(storedKey ? { apiKey: storedKey } : {}),
-        }),
-      });
+    // Filter demo outputs to only the selected platforms
+    const demoResults: GeneratedContent[] = Array.from(selectedPlatforms)
+      .filter((p) => p in DEMO_OUTPUTS)
+      .map((p) => DEMO_OUTPUTS[p]);
 
-      const data = await res.json();
+    setResults(demoResults);
+    setLoading(false);
 
-      if (!res.ok) {
-        if (data.needsKey) {
-          setNeedsKey(true);
-          setLoading(false);
-          return;
-        }
-        throw new Error(data.error || "Generation failed");
-      }
-
-      setResults(data.results);
-
-      // Mark demo as used
-      if (typeof window !== "undefined") {
-        sessionStorage.setItem(DEMO_KEY, "true");
-      }
-    } catch (err: unknown) {
-      setError(err instanceof Error ? err.message : "Something went wrong.");
-    } finally {
-      setLoading(false);
+    // Mark demo as used
+    if (typeof window !== "undefined") {
+      sessionStorage.setItem(DEMO_KEY, "true");
     }
   };
 
@@ -252,46 +225,6 @@ export default function Demo() {
           {/* Error */}
           {error && (
             <p className="mt-4 text-sm text-red-400">{error}</p>
-          )}
-
-          {/* BYOK input */}
-          {needsKey && (
-            <div className="mt-5 rounded-xl border border-[#7c3aed]/30 bg-[#0a0a0a] p-5">
-              <div className="flex items-start gap-3 mb-4">
-                <Key className="h-5 w-5 shrink-0 text-[#7c3aed] mt-0.5" />
-                <div>
-                  <p className="text-sm font-medium text-white">
-                    This demo needs an API key to work.
-                  </p>
-                  <p className="mt-1 text-xs text-[#888]">
-                    Enter your Anthropic API key below. It stays in your browser
-                    and is never stored on our servers.
-                  </p>
-                </div>
-              </div>
-              <div className="flex gap-3">
-                <input
-                  type="password"
-                  value={apiKeyInput}
-                  onChange={(e) => setApiKeyInput(e.target.value)}
-                  placeholder="sk-ant-..."
-                  className="flex-1 rounded-lg border border-[#2a2a2a] bg-[#141414] px-4 py-2.5 text-sm text-white placeholder-[#555] transition-colors focus:border-[#7c3aed]/50 focus:outline-none"
-                />
-                <button
-                  onClick={() => {
-                    if (apiKeyInput.trim()) {
-                      sessionStorage.setItem(BYOK_KEY, apiKeyInput.trim());
-                      setNeedsKey(false);
-                      handleGenerate();
-                    }
-                  }}
-                  disabled={!apiKeyInput.trim()}
-                  className="shrink-0 rounded-lg bg-gradient-to-r from-[#7c3aed] to-[#06b6d4] px-5 py-2.5 text-sm font-semibold text-white transition-all hover:shadow-lg hover:shadow-[#7c3aed]/20 disabled:opacity-50 disabled:cursor-not-allowed"
-                >
-                  Save &amp; Generate
-                </button>
-              </div>
-            </div>
           )}
 
           {/* Demo used message */}
